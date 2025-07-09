@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EmployeeExpensesClaim.DataAccessLayer.Entities;
 
-public partial class File
+public partial class FilesTable
 {
     public int Id { get; set; }
 

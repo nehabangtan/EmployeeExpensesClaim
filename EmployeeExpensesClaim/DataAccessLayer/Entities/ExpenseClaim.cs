@@ -33,5 +33,5 @@ public partial class ExpenseClaim
 
     public virtual Employee Emp { get; set; } = null!;
 
-    public virtual ICollection<File> Files { get; set; } = new List<File>();
+    public virtual ICollection<FilesTable> FilesTables { get; set; } = new List<FilesTable>();
 }

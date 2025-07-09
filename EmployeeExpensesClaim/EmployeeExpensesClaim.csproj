@@ -20,6 +20,7 @@
     <Folder Include="BusinessAccessLayer\Interfaces\" />
     <Folder Include="BusinessAccessLayer\Services\" />
     <Folder Include="Controllers\" />
+    <Folder Include="DataAccessLayer\DbContexts\" />
     <Folder Include="DataAccessLayer\Repositories\Interfaces\" />
     <Folder Include="DataAccessLayer\Repositories\Implementations\" />
     <Folder Include="Helpers\" />

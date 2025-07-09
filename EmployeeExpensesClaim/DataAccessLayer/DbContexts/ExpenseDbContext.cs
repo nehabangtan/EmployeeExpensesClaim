@@ -22,7 +22,7 @@ public partial class ExpenseDbContext : DbContext
 
     public virtual DbSet<ExpenseClaim> ExpenseClaims { get; set; }
 
-    public virtual DbSet<File> Files { get; set; }
+    public virtual DbSet<FilesTable> FilesTables { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -106,9 +106,11 @@ public partial class ExpenseDbContext : DbContext
                 .HasConstraintName("FK__ExpenseCl__EmpId__3C69FB99");
         });
 
-        modelBuilder.Entity<File>(entity =>
+        modelBuilder.Entity<FilesTable>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Files__3214EC070EECC0F7");
+
+            entity.ToTable("FilesTable");
 
             entity.Property(e => e.FilePath)
                 .HasMaxLength(255)
@@ -118,7 +120,7 @@ public partial class ExpenseDbContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
 
-            entity.HasOne(d => d.Claim).WithMany(p => p.Files)
+            entity.HasOne(d => d.Claim).WithMany(p => p.FilesTables)
                 .HasForeignKey(d => d.ClaimId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Files__ClaimId__403A8C7D");
