@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.7">
@@ -17,14 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="BusinessAccessLayer\Interfaces\" />
-    <Folder Include="BusinessAccessLayer\Services\" />
-    <Folder Include="Controllers\" />
+    <Folder Include="BusinessAccessLayer\Models\" />
     <Folder Include="DataAccessLayer\DbContexts\" />
-    <Folder Include="DataAccessLayer\Repositories\Interfaces\" />
-    <Folder Include="DataAccessLayer\Repositories\Implementations\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>
