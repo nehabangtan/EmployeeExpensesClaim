@@ -11,6 +11,8 @@ namespace EmployeeExpensesClaim
             CreateMap<Employee, EmployeeViewModel>();
 
             CreateMap<EmployeeViewModel, Employee>();
+
+            CreateMap<ExpenseClaim, ExpenseClaimViewModel>().ReverseMap();
         }
     }
 }

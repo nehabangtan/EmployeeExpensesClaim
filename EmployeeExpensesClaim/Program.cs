@@ -17,6 +17,9 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IAuthService, AuthorizationService>();
+builder.Services.AddScoped<IExpenseClaimRepository, ExpenseClaimRepository>();
+builder.Services.AddScoped<IExpenseClaimService, ExpenseClaimService>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
