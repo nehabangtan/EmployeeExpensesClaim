@@ -6,7 +6,11 @@ namespace EmployeeExpensesClaim.DataAccessLayer.Repositories.Interfaces
     {
         
       Task<Employee?> GetEmployeeByIdRepoAsync(int id);
-      Task UpdateAsync(Employee emp);
-        
+      Task UpdateRepoAsync(Employee emp);
+
+      Task CreateRepoAsync(Employee emp);
+
+      void DeleteRepoAsync(Employee emp);   
+
     }
 }

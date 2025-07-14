@@ -30,7 +30,7 @@ namespace EmployeeExpensesClaim.BusinessAccessLayer.Services
             try
             {
                 employee.EmpRole = Constants.AdminRole;
-                await _employeeRepo.UpdateAsync(employee);
+                await _employeeRepo.UpdateRepoAsync(employee);
                 return ResponseHelper.Success("Role assigned as Admin successfully.", _mapper.Map<EmployeeViewModel>(employee));
             }
             catch (Exception ex)

@@ -17,11 +17,6 @@ namespace EmployeeExpensesClaim.Controllers
         }
 
 
-
-
-        //1. Valid empId with user , admin , null
-        //2.in valid empId
-        // POST: api/Authorization/assign-role
         [HttpPatch("assign-admin/{empId}")]
         //[Authorize(Roles = "Admin")] // Only admins can assign other admins
         public async Task<IActionResult> AssignAdminRole(int empId)
