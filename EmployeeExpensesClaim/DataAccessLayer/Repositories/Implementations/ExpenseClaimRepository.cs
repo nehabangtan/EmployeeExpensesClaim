@@ -21,7 +21,7 @@ namespace EmployeeExpensesClaim.DataAccessLayer.Repositories.Implementations
                     .Include(ec => ec.Emp)
                     .Include(ec => ec.FilesTables)
                     .Include(ec => ec.AuditLogs)
-                    .FirstOrDefaultAsync(ec => ec.Id == id);
+                    .FirstOrDefaultAsync(ec => ec.ClaimId == id);
             }
 
             public async Task<List<ExpenseClaim>> GetByEmployeeIdAsync(int empId)

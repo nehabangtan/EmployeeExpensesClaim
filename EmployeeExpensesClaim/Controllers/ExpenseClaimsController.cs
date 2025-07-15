@@ -70,7 +70,7 @@ namespace EmployeeExpensesClaim.Controllers
             [HttpPut]
             public async Task<IActionResult> UpdateClaim([FromBody] ExpenseClaimViewModel model)
             {
-                if (model == null || model.Id <= 0)
+                if (model == null || model.ClaimId <= 0)
                     return BadRequest(new { message = "Invalid claim ID or data." });
 
                 try

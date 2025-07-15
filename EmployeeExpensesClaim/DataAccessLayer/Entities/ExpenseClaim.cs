@@ -5,7 +5,7 @@ namespace EmployeeExpensesClaim.DataAccessLayer.Entities;
 
 public partial class ExpenseClaim
 {
-    public int Id { get; set; }
+    public int ClaimId { get; set; }
 
     public int EmpId { get; set; }
 

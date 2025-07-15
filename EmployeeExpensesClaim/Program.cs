@@ -19,6 +19,8 @@ builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IAuthService, AuthorizationService>();
 builder.Services.AddScoped<IExpenseClaimRepository, ExpenseClaimRepository>();
 builder.Services.AddScoped<IExpenseClaimService, ExpenseClaimService>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
 
 
 builder.Services.AddControllers();

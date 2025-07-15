@@ -32,7 +32,7 @@ public partial class ExpenseDbContext : DbContext
     {
         modelBuilder.Entity<AuditLog>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__AuditLog__3214EC071A7F0D5A");
+            entity.HasKey(e => e.AuditId).HasName("PK__AuditLog__3214EC071A7F0D5A");
 
             entity.Property(e => e.CreatedDate)
                 .HasDefaultValueSql("(getdate())")
@@ -52,7 +52,7 @@ public partial class ExpenseDbContext : DbContext
 
         modelBuilder.Entity<Employee>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Employee__3214EC079FA16306");
+            entity.HasKey(e => e.EmpId).HasName("PK__Employee__3214EC079FA16306");
 
             entity.ToTable("Employee");
 
@@ -84,7 +84,7 @@ public partial class ExpenseDbContext : DbContext
 
         modelBuilder.Entity<ExpenseClaim>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__ExpenseC__3214EC07B7D4A2CD");
+            entity.HasKey(e => e.ClaimId).HasName("PK__ExpenseC__3214EC07B7D4A2CD");
 
             entity.Property(e => e.Amount).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.CreatedDate)
@@ -108,7 +108,7 @@ public partial class ExpenseDbContext : DbContext
 
         modelBuilder.Entity<FilesTable>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Files__3214EC070EECC0F7");
+            entity.HasKey(e => e.FileId).HasName("PK__Files__3214EC070EECC0F7");
 
             entity.ToTable("FilesTable");
 

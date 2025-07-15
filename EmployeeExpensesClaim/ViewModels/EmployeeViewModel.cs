@@ -4,7 +4,7 @@ namespace EmployeeExpensesClaim.ViewModels
 {
     public class EmployeeViewModel
     {
-        public int Id { get; set; }
+        public int EmpId { get; set; }
 
         public string EmpCode { get; set; } = null!;
 

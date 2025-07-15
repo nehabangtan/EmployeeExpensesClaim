@@ -5,7 +5,7 @@ namespace EmployeeExpensesClaim.DataAccessLayer.Entities;
 
 public partial class AuditLog
 {
-    public int Id { get; set; }
+    public int AuditId { get; set; }
 
     public int EmpId { get; set; }
 

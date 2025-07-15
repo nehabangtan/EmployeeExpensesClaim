@@ -2,7 +2,7 @@
 {
     public class ExpenseClaimViewModel
     {
-        public int Id { get; set; }
+        public int ClaimId { get; set; }
         public int EmpId { get; set; }
         public string ExpenseType { get; set; } = string.Empty;
         public decimal Amount { get; set; }

@@ -60,7 +60,7 @@ namespace EmployeeExpensesClaim.BusinessAccessLayer.Services
 
         public async Task<ResponseViewModel<ExpenseClaimViewModel>> UpdateClaimAsync(ExpenseClaimViewModel claimVM)
         {
-            var entity = await _repo.GetByIdAsync(claimVM.Id);
+            var entity = await _repo.GetByIdAsync(claimVM.ClaimId);
             if (entity == null)
                 return new() { Status = false, Message = "Claim not found." };
 
