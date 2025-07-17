@@ -32,7 +32,7 @@ public partial class ExpenseDbContext : DbContext
     {
         modelBuilder.Entity<AuditLog>(entity =>
         {
-            entity.HasKey(e => e.AuditId).HasName("PK__AuditLog__3214EC071A7F0D5A");
+            entity.HasKey(e => e.AuditId).HasName("PK__AuditLog__3214EC0760271FC7");
 
             entity.Property(e => e.CreatedDate)
                 .HasDefaultValueSql("(getdate())")
@@ -42,21 +42,21 @@ public partial class ExpenseDbContext : DbContext
             entity.HasOne(d => d.Claim).WithMany(p => p.AuditLogs)
                 .HasForeignKey(d => d.ClaimId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__AuditLogs__Claim__44FF419A");
+                .HasConstraintName("FK__AuditLogs__Claim__45F365D3");
 
             entity.HasOne(d => d.Emp).WithMany(p => p.AuditLogs)
                 .HasForeignKey(d => d.EmpId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__AuditLogs__EmpId__440B1D61");
+                .HasConstraintName("FK__AuditLogs__EmpId__44FF419A");
         });
 
         modelBuilder.Entity<Employee>(entity =>
         {
-            entity.HasKey(e => e.EmpId).HasName("PK__Employee__3214EC079FA16306");
+            entity.HasKey(e => e.EmpId).HasName("PK__Employee__3214EC077E8D6A35");
 
             entity.ToTable("Employee");
 
-            entity.HasIndex(e => e.Email, "UQ__Employee__A9D105342AEFBFE2").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Employee__A9D10534503EF51C").IsUnique();
 
             entity.Property(e => e.CreatedDate)
                 .HasDefaultValueSql("(getdate())")
@@ -84,7 +84,7 @@ public partial class ExpenseDbContext : DbContext
 
         modelBuilder.Entity<ExpenseClaim>(entity =>
         {
-            entity.HasKey(e => e.ClaimId).HasName("PK__ExpenseC__3214EC07B7D4A2CD");
+            entity.HasKey(e => e.ClaimId).HasName("PK__ExpenseC__3214EC07989857C3");
 
             entity.Property(e => e.Amount).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.CreatedDate)
@@ -108,9 +108,7 @@ public partial class ExpenseDbContext : DbContext
 
         modelBuilder.Entity<FilesTable>(entity =>
         {
-            entity.HasKey(e => e.FileId).HasName("PK__Files__3214EC070EECC0F7");
-
-            entity.ToTable("FilesTable");
+            entity.HasKey(e => e.FileId).HasName("PK__Files__3214EC079BDB4F16");
 
             entity.Property(e => e.FilePath)
                 .HasMaxLength(255)

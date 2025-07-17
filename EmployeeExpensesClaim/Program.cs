@@ -14,10 +14,10 @@ builder.Services.AddDbContext<ExpenseDbContext>(options =>
 
 // Add services to the container.
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
-builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+//builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IAuthService, AuthorizationService>();
-builder.Services.AddScoped<IExpenseClaimRepository, ExpenseClaimRepository>();
+//builder.Services.AddScoped<IExpenseClaimRepository, ExpenseClaimRepository>();
 builder.Services.AddScoped<IExpenseClaimService, ExpenseClaimService>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 

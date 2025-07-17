@@ -18,7 +18,15 @@ namespace EmployeeExpensesClaim.DataAccessLayer.Repositories.Implementations
 
         public async Task<T?> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
 
+        public async Task<IEnumerable<T>> GetAllByPropertyAsync(string propertyName, int value)
+        {
+            return await _dbSet
+                .Where(e => EF.Property<int>(e, propertyName) == value)
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.ToListAsync();
+
 
         public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate) =>
             await _dbSet.Where(predicate).ToListAsync();
