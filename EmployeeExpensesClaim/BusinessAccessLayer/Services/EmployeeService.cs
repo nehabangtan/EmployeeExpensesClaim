@@ -124,6 +124,7 @@ using AutoMapper;
 using EmployeeExpensesClaim.BusinessAccessLayer.Interfaces;
 using EmployeeExpensesClaim.DataAccessLayer.Entities;
 using EmployeeExpensesClaim.DataAccessLayer.Repositories.Interfaces;
+using EmployeeExpensesClaim.Helpers;
 using EmployeeExpensesClaim.ViewModels;
 namespace EmployeeExpensesClaim.BusinessAccessLayer.Services
 {
@@ -174,6 +175,7 @@ namespace EmployeeExpensesClaim.BusinessAccessLayer.Services
                     var newEmp = _mapper.Map<Employee>(employeeViewModel);
                     newEmp.CreatedBy = int.Parse(employeeViewModel.EmpCode);
                     newEmp.CreatedDate = DateTime.UtcNow;
+                    newEmp.PasswordHash = PasswordHasher.HashPassword(employeeViewModel.PasswordHash);
 
                     await _employeeRepository.AddAsync(newEmp);
                     await _employeeRepository.SaveAsync();
@@ -181,6 +183,35 @@ namespace EmployeeExpensesClaim.BusinessAccessLayer.Services
                     response.Status = true;
                     response.Message = "Employee created successfully.";
                     response.Data = _mapper.Map<EmployeeViewModel>(newEmp);
+                }
+                else
+                {
+                    response.Status = false;
+                    response.Message = "Employee with this ID already exists.";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Status = false;
+                response.Message = "An error occurred while saving the employee.";
+                response.Error = ex.Message;
+            }
+
+            return response;
+        }
+        public async Task<ResponseViewModel<EmployeeViewModel>> UpdateEmployeeAsync(EmployeeViewModel employeeViewModel)
+        {
+            var response = new ResponseViewModel<EmployeeViewModel>();
+
+            try
+            {
+                var existingEmpRecord = await _employeeRepository.GetByIdAsync(employeeViewModel.EmpId);
+
+                if (existingEmpRecord == null)
+                {
+                    response.Status = false;
+                    response.Message = "Employee not found.";
+                    return response;
                 }
                 else
                 {
@@ -192,7 +223,7 @@ namespace EmployeeExpensesClaim.BusinessAccessLayer.Services
                     existingEmpRecord.ModifiedDate = DateTime.UtcNow;
                     existingEmpRecord.CreatedDate = createdDate;
                     existingEmpRecord.CreatedBy = createdBy;
-
+                    existingEmpRecord.PasswordHash = employeeViewModel.PasswordHash != null ? PasswordHasher.HashPassword(employeeViewModel.PasswordHash) : existingEmpRecord.PasswordHash;
                     _employeeRepository.Update(existingEmpRecord);
                     await _employeeRepository.SaveAsync();
 
@@ -237,5 +268,6 @@ namespace EmployeeExpensesClaim.BusinessAccessLayer.Services
             }
             return response;
         }
+
     }
 }

@@ -8,7 +8,8 @@ namespace EmployeeExpensesClaim.BusinessAccessLayer.Interfaces
         Task<ResponseViewModel<EmployeeViewModel>> GetEmployeeByIdAsync(int id);
 
         Task<ResponseViewModel<EmployeeViewModel>> CreateEmployeeAsync(EmployeeViewModel employeeViewModel);
-
+        Task<ResponseViewModel<EmployeeViewModel>> UpdateEmployeeAsync(EmployeeViewModel employeeViewModel);
         Task<ResponseViewModel<EmployeeViewModel>> DeleteEmployeeByIdAsync(int id);
+        
     }
 }

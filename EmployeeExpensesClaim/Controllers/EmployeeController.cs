@@ -9,6 +9,7 @@ public class EmployeeController : ControllerBase
 {
     private readonly IEmployeeService _employeeService;
 
+
     public EmployeeController(IEmployeeService employeeService)
     {
         _employeeService = employeeService;
@@ -76,6 +77,48 @@ public class EmployeeController : ControllerBase
         }
     }
 
+    
+    [HttpPut]
+    public async Task<IActionResult> UpdateEmployee([FromBody] EmployeeViewModel employeeViewModel)
+    {
+        if (employeeViewModel == null)
+        {
+            return BadRequest(new
+            {
+                message = "Invalid employee data."
+            });
+        }
+
+        try
+        {
+            var result = await _employeeService.UpdateEmployeeAsync(employeeViewModel);
+
+            if (!result.Status)
+            {
+                return NotFound(new
+                {
+                    message = result.Message,
+                    error = result.Error
+                });
+            }
+
+            return Ok(new
+            {
+                message = result.Message,
+                data = result.Data
+            });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new
+            {
+                message = "An unexpected error occurred while creating the employee.",
+                error = ex.Message
+            });
+        }
+    }
+
+    
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteEmployee(int id)
     {

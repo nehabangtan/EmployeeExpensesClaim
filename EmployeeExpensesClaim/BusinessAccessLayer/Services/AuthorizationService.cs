@@ -4,6 +4,11 @@ using EmployeeExpensesClaim.DataAccessLayer.Entities;
 using EmployeeExpensesClaim.DataAccessLayer.Repositories.Interfaces;
 using EmployeeExpensesClaim.Helpers;
 using EmployeeExpensesClaim.ViewModels;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+
 
 namespace EmployeeExpensesClaim.BusinessAccessLayer.Services
 {
@@ -11,11 +16,14 @@ namespace EmployeeExpensesClaim.BusinessAccessLayer.Services
     {
         private readonly IGenericRepository<Employee> _employeeRepo;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _config;
 
-        public AuthorizationService(IGenericRepository<Employee> employeeRepo, IMapper mapper)
+        
+        public AuthorizationService(IGenericRepository<Employee> employeeRepo, IMapper mapper, IConfiguration config)
         {
             _employeeRepo = employeeRepo;
             _mapper = mapper;
+            _config = config;
         }
 
         public async Task<ResponseViewModel<EmployeeViewModel>> AssignAdminRoleAsync(int empId)
@@ -39,6 +47,32 @@ namespace EmployeeExpensesClaim.BusinessAccessLayer.Services
             {
                 return ResponseHelper.Failure<EmployeeViewModel>("An error occurred while assigning Admin role.", ex.Message);
             }
+        }      
+
+        public async Task<string> Authenticate(EmployeeViewModel user)
+        {
+            var employee = await _employeeRepo.GetByIdAsync(user.EmpId);
+
+            if (employee == null || !PasswordHasher.Verify(user.PasswordHash, employee.PasswordHash, user.EmpCode, employee.EmpCode))
+                return null;
+
+            var key = Encoding.UTF8.GetBytes(_config["Jwt:Key"]);
+
+            var claims = new[]
+            {
+            new Claim(ClaimTypes.Name, user.EmpCode),
+            new Claim(ClaimTypes.Role, user.EmpRole),
+        };
+
+            var token = new JwtSecurityToken(
+                issuer: _config["Jwt:Issuer"],
+                audience: _config["Jwt:Audience"],
+                claims: claims,
+                expires: DateTime.UtcNow.AddMinutes(60),
+                signingCredentials: new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 
