@@ -9,5 +9,6 @@ namespace EmployeeExpensesClaim.BusinessAccessLayer.Interfaces
         Task<ResponseViewModel<ExpenseClaimViewModel>> CreateClaimAsync(ExpenseClaimViewModel claimVM);
         Task<ResponseViewModel<ExpenseClaimViewModel>> UpdateClaimAsync(ExpenseClaimViewModel claimVM);
         Task<ResponseViewModel<bool>> DeleteClaimAsync(int id);
+       
     }
 }

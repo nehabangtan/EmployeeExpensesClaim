@@ -9,6 +9,7 @@ namespace EmployeeExpensesClaim.DataAccessLayer.Repositories.Interfaces
         Task<IEnumerable<T>> GetAllByPropertyAsync(string propertyName, int value);
         Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
         Task AddAsync(T entity);
+        Task AddRangeAsync(IEnumerable<T> entities);
         void Update(T entity);
         Task<bool> DeleteAsync(int id);
         Task SaveAsync();

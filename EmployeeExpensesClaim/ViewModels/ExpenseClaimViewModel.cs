@@ -10,6 +10,7 @@
         public string? ExpenseDescription { get; set; }
         public string? ExpenseStatus { get; set; }
         public string? Comment { get; set; }
+        public List<IFormFile>? UploadedFiles { get; set; }
         public DateTime? CreatedDate { get; set; }
         public int? CreatedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }
