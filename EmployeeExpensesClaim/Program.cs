@@ -16,6 +16,7 @@ builder.Services.AddDbContext<ExpenseDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IAuthService, AuthorizationService>();
 
+
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
@@ -54,9 +55,19 @@ builder.Services.AddAzureClients(clientBuilder =>
     clientBuilder.AddQueueServiceClient(builder.Configuration["StorageConnectionString:queueServiceUri"]!).WithName("StorageConnectionString");
     clientBuilder.AddTableServiceClient(builder.Configuration["StorageConnectionString:tableServiceUri"]!).WithName("StorageConnectionString");
 });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp",
+        builder => builder
+            .AllowAnyOrigin() // OR .WithOrigins("http://localhost:3000")
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 
 var app = builder.Build();
 
+app.UseCors("AllowReactApp");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
